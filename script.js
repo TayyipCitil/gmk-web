@@ -330,9 +330,9 @@ document.addEventListener('DOMContentLoaded', function() {
             let html = '';
             data.forEach(item => {
                 html += `
-                    <div class="bg-black/50 backdrop-blur-md p-6 rounded-2xl text-center border border-white/10 shadow-xl transition hover:border-indigo-400/50">
-                        <div class="text-4xl font-bold text-indigo-400">${item.baslik}</div>
-                        <div class="text-sm text-gray-300 mt-2">${item.aciklama}</div>
+                    <div class="bg-black/50 backdrop-blur-md p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-white/10 shadow-xl transition hover:border-indigo-400/50 min-h-[160px]">
+                        <div class="text-3xl md:text-4xl font-bold text-indigo-400 break-words w-full">${item.baslik}</div>
+                        <div class="text-xs md:text-sm text-gray-300 mt-2 leading-relaxed break-words w-full">${item.aciklama}</div>
                     </div>`;
             });
             container.innerHTML = html;
