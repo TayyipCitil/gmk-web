@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-}
 
     // ---------- 2. SAYFA GEÇİŞLERİ ----------
     const navLinks = document.querySelectorAll('.nav-link, .nav-link-mobile');
