@@ -275,8 +275,9 @@ document.addEventListener('DOMContentLoaded', function() {
             cards.forEach(item => {
                 html += `
                     <div class="gmk-card text-center" onclick="toggleCardFocus(this)">
-                        <img src="${item.resim_yolu}" alt="${item.ad_soyad}" loading="lazy" class="rounded-full w-32 h-32 mx-auto object-cover border-2 border-indigo-500/30" />
-                        <div class="card-title mt-3">${item.ad_soyad}</div>
+                        <!-- YENİ: Resim boyutlandırması kare (aspect-square) olacak şekilde ayarlandı ve css kısıtlaması (height: auto !important) ezip geçildi -->
+                        <img src="${item.resim_yolu}" alt="${item.ad_soyad}" loading="lazy" class="w-full aspect-square object-cover rounded-xl" style="height: auto !important;" />
+                        <div class="card-title mt-4">${item.ad_soyad}</div>
                         <div class="card-sub">${item.unvan}</div>
                         <div class="card-desc text-sm mt-2">${item.metin}</div>
                     </div>`;
