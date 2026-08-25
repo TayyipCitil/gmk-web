@@ -8,14 +8,28 @@ window.toggleCardFocus = function(card) {
     const isFocused = card.classList.contains('focused-card');
 
     if (isFocused) {
+        // Kartı Küçült
         allCards.forEach(c => c.style.display = '');
         card.classList.remove('focused-card');
         container.classList.remove('grid-focus-mode');
     } else {
+        // Kartı Büyüt
         allCards.forEach(c => c.style.display = 'none');
         card.style.display = 'block';
         card.classList.add('focused-card');
         container.classList.add('grid-focus-mode');
+
+        // YENİ: Büyüyen karta otomatik odaklan ve ekranı kaydır
+        setTimeout(() => {
+            // Sabit menünün (navbar) kartın üstünü kapatmaması için -100 piksel pay bırakıyoruz
+            const yOffset = -100; 
+            const y = card.getBoundingClientRect().top + window.scrollY + yOffset;
+            
+            window.scrollTo({
+                top: y, 
+                behavior: 'smooth'
+            });
+        }, 50); // Tarayıcının yeni boyutları hesaplaması için milisaniyelik bir pay
     }
 };
 
