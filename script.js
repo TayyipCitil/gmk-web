@@ -30,16 +30,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
-            const isOpen = mobileMenu.classList.contains('visible');
+            // Menü açık mı kontrol et (translate-x-0 ekranın içinde demektir)
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            
             if (isOpen) {
-                mobileMenu.classList.remove('visible');
-                mobileMenu.classList.add('hidden');
+                // Menüyü Sağa Kaydırarak Kapat
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
                 openIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
                 document.body.style.overflow = '';
             } else {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('visible');
+                // Menüyü Sola Kaydırarak Aç
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
                 openIcon.classList.add('hidden');
                 closeIcon.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
@@ -48,14 +52,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.querySelectorAll('.nav-link-mobile').forEach(link => {
             link.addEventListener('click', function() {
-                mobileMenu.classList.remove('visible');
-                mobileMenu.classList.add('hidden');
+                // Herhangi bir sekmeye tıklanınca menüyü kapat
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
                 openIcon.classList.remove('hidden');
                 closeIcon.classList.add('hidden');
                 document.body.style.overflow = '';
             });
         });
     }
+}
 
     // ---------- 2. SAYFA GEÇİŞLERİ ----------
     const navLinks = document.querySelectorAll('.nav-link, .nav-link-mobile');
