@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {}
     }
 
-    // ---------- 7. SERTİFİKA KONTROL ----------
+   // ---------- 7. SERTİFİKA KONTROL ----------
     let certData = [];
     async function loadCertData() {
         try {
@@ -381,7 +381,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const record = certData.find(i => i.id.toUpperCase() === code);
             if (record) {
                 resBox.classList.add('success');
-                icon.textContent = '✅'; msg.textContent = `Doğrulandı: ${record.name}`;
+                icon.textContent = '✅'; 
+                
+                // YENİ: Hem adı soyadı hem de JSON'daki türü (type) ekrana yazdırıyoruz
+                // (Eğer JSON'da alan adı 'type' yerine başka bir şeyse, örn record.etkinlik yapabilirsin)
+                const sertifikaTuru = record.type ? `(${record.type})` : '';
+                msg.textContent = `Doğrulandı: ${record.name} ${sertifikaTuru}`;
             } else {
                 resBox.classList.add('error');
                 icon.textContent = '❌'; msg.textContent = 'Kayıt Bulunamadı.';
