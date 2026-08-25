@@ -329,9 +329,24 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let html = '';
             data.forEach(item => {
+                const baslik = item.baslik || '';
+                
+                // Eğer metinde <br> varsa, sadece ilk satırın karakter uzunluğunu al; yoksa tüm başlığın uzunluğunu al
+                const birinciSatir = baslik.includes('<br>') ? baslik.split('<br>')[0] : baslik;
+                const karakterSayisi = birinciSatir.length;
+                
+                // Akıllı Font Boyutlandırma (Satırdaki karakter sayısına göre)
+                let textSizeClass = 'text-4xl md:text-5xl'; // Çok kısa (1-4 karakter, örn: "2")
+                
+                if (karakterSayisi > 8) {
+                    textSizeClass = 'text-xl md:text-2xl'; // Uzun satırlar
+                } else if (karakterSayisi > 4) {
+                    textSizeClass = 'text-2xl md:text-3xl'; // Orta satırlar (örn: "300.000+", "Birinci")
+                }
+
                 html += `
                     <div class="bg-black/50 backdrop-blur-md p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-white/10 shadow-xl transition hover:border-indigo-400/50 min-h-[160px]">
-                        <div class="text-3xl md:text-4xl font-bold text-indigo-400 break-words w-full">${item.baslik}</div>
+                        <div class="${textSizeClass} font-bold text-indigo-400 break-words w-full">${baslik}</div>
                         <div class="text-xs md:text-sm text-gray-300 mt-2 leading-relaxed break-words w-full">${item.aciklama}</div>
                     </div>`;
             });
