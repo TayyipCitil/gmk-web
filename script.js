@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {}
     }
 
-    // ---------- 6. BAŞARILAR ----------
+    // ---------- 6. BAŞARILAR (DİNAMİK ORAN-ORANTI ALGORİTMASI) ----------
     async function loadBasarilar() {
         const container = document.getElementById('basarilar-container');
         try {
@@ -331,22 +331,20 @@ document.addEventListener('DOMContentLoaded', function() {
             data.forEach(item => {
                 const baslik = item.baslik || '';
                 
-                // Eğer metinde <br> varsa, sadece ilk satırın karakter uzunluğunu al; yoksa tüm başlığın uzunluğunu al
+                // Eğer metinde <br> varsa ilk satırı baz al, yoksa tamamını
                 const birinciSatir = baslik.includes('<br>') ? baslik.split('<br>')[0] : baslik;
                 const karakterSayisi = birinciSatir.length;
-                
-                // Akıllı Font Boyutlandırma (Satırdaki karakter sayısına göre)
-                let textSizeClass = 'text-4xl md:text-5xl'; // Çok kısa (1-4 karakter, örn: "2")
-                
-                if (karakterSayisi > 8) {
-                    textSizeClass = 'text-xl md:text-2xl'; // Uzun satırlar
-                } else if (karakterSayisi > 4) {
-                    textSizeClass = 'text-2xl md:text-3xl'; // Orta satırlar (örn: "300.000+", "Birinci")
-                }
+
+                // MATEMATİKSEL ORAN-ORANTI FORMÜLÜ:
+                // Karakter sayısı arttıkça font boyutunu ters orantıyla pürüzsüzce küçültüyoruz.
+                // Taban boyut 3.2rem (kısa yazılar için devasa), sınır ise 1.2rem'in altına düşmeyecek (uzun yazılar için güvenli).
+                let fontSize = 3.2 - (karakterSayisi * 0.14);
+                if (fontSize < 1.3) fontSize = 1.3; // Çok uzun yazılarda okunabilirliği korumak için alt sınır
+                if (fontSize > 3.2) fontSize = 3.2; // Çok kısa yazılarda üst sınır
 
                 html += `
                     <div class="bg-black/50 backdrop-blur-md p-6 rounded-2xl flex flex-col items-center justify-center text-center border border-white/10 shadow-xl transition hover:border-indigo-400/50 min-h-[160px]">
-                        <div class="${textSizeClass} font-bold text-indigo-400 break-words w-full">${baslik}</div>
+                        <div class="font-bold text-indigo-400 break-words w-full" style="font-size: ${fontSize}rem; line-height: 1.2;">${baslik}</div>
                         <div class="text-xs md:text-sm text-gray-300 mt-2 leading-relaxed break-words w-full">${item.aciklama}</div>
                     </div>`;
             });
