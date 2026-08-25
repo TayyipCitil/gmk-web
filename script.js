@@ -21,48 +21,38 @@ window.toggleCardFocus = function(card) {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ---------- 1. MOBİL MENÜ ----------
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const openIcon = document.getElementById('menu-open-icon');
-    const closeIcon = document.getElementById('menu-close-icon');
+    // ---------- 1. MOBİL MENÜ (YENİ DROPDOWN SİSTEMİ) ----------
+    const dropdownBtn = document.getElementById('mobile-dropdown-btn');
+    const dropdownMenu = document.getElementById('mobile-dropdown-menu');
+    const dropdownArrow = document.getElementById('dropdown-arrow');
+    const currentSectionText = document.getElementById('current-section-text');
 
-    if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', function(e) {
+    if (dropdownBtn && dropdownMenu) {
+        // Butona tıklanınca menüyü aç/kapat ve oku döndür
+        dropdownBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            // Menü açık mı kontrol et (translate-x-0 ekranın içinde demektir)
-            const isOpen = mobileMenu.classList.contains('translate-x-0');
-            
-            if (isOpen) {
-                // Menüyü Sağa Kaydırarak Kapat
-                mobileMenu.classList.remove('translate-x-0');
-                mobileMenu.classList.add('translate-x-full');
-                openIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-                document.body.style.overflow = '';
-            } else {
-                // Menüyü Sola Kaydırarak Aç
-                mobileMenu.classList.remove('translate-x-full');
-                mobileMenu.classList.add('translate-x-0');
-                openIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+            dropdownMenu.classList.toggle('hidden');
+            dropdownArrow.classList.toggle('rotate-180');
+        });
+
+        // Sayfada boş bir yere tıklanırsa menüyü otomatik kapat
+        document.addEventListener('click', function(e) {
+            if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.add('hidden');
+                dropdownArrow.classList.remove('rotate-180');
             }
         });
 
+        // Menüdeki bir linke tıklanınca menüyü kapat
         document.querySelectorAll('.nav-link-mobile').forEach(link => {
             link.addEventListener('click', function() {
-                // Herhangi bir sekmeye tıklanınca menüyü kapat
-                mobileMenu.classList.remove('translate-x-0');
-                mobileMenu.classList.add('translate-x-full');
-                openIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-                document.body.style.overflow = '';
+                dropdownMenu.classList.add('hidden');
+                dropdownArrow.classList.remove('rotate-180');
             });
         });
     }
 
-    // ---------- 2. SAYFA GEÇİŞLERİ ----------
+    // ---------- 2. SAYFA GEÇİŞLERİ VE DİNAMİK YAZI ----------
     const navLinks = document.querySelectorAll('.nav-link, .nav-link-mobile');
     const sections = {
         anasayfa: document.getElementById('section-anasayfa'),
@@ -74,18 +64,36 @@ document.addEventListener('DOMContentLoaded', function() {
         sertifika: document.getElementById('section-sertifika')
     };
 
+    // Bölüm ID'lerini ekranda görünecek Türkçe isimlerle eşleştir
+    const sectionNames = {
+        'anasayfa': 'Anasayfa',
+        'faaliyetler': 'Faaliyetler',
+        'uyeler': 'Üyeler',
+        'bultenler': 'Bültenler',
+        'basari': 'Başarılar',
+        'iletisim': 'İletişim',
+        'sertifika': 'Sertifika Kontrol'
+    };
+
     function switchSection(sectionId) {
+        // Tüm sayfaları gizle, seçileni göster
         Object.keys(sections).forEach(key => {
             if (sections[key]) sections[key].classList.remove('active');
         });
-
         if (sections[sectionId]) sections[sectionId].classList.add('active');
 
+        // Menü linklerinin aktifliğini (mor rengi) ayarla
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
             if (link.dataset.section === sectionId) link.classList.add('active');
         });
+
+        // YENİ: Mobilde üstte yazan başlığı güncelle
+        if (currentSectionText && sectionNames[sectionId]) {
+            currentSectionText.textContent = sectionNames[sectionId];
+        }
         
+        // Odaklanmış kart varsa sıfırla
         document.querySelectorAll('.grid-focus-mode').forEach(container => {
             container.classList.remove('grid-focus-mode');
             container.querySelectorAll('.gmk-card').forEach(c => {
