@@ -39,7 +39,7 @@
     </div>
 
     <!-- ========== NAVIGASYON ========== -->
-    <header class="fixed top-0 left-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-white/10">
+    <header class="fixed top-0 left-0 z-50 w-full bg-black/90 backdrop-blur-md border-b border-white/10">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 text-white font-bold text-xl transition hover:opacity-80">
                 <img src="logo.png" alt="GMK Logo" class="h-7 w-auto rounded-full object-cover" />
@@ -47,12 +47,13 @@
                 <span class="hidden sm:inline text-sm font-normal text-gray-300">Girişimci Mühendisler Kulübü</span>
             </a>
 
+            <!-- Desktop Menü -->
             <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
                 <li><a class="nav-link active" data-section="anasayfa">Anasayfa</a></li>
                 <li><a class="nav-link" data-section="faaliyetler">Faaliyetler</a></li>
                 <li><a class="nav-link" data-section="uyeler">Üyeler</a></li>
-                <li><a class="nav-link" data-section="basari">Başarılar</a></li>
                 <li><a class="nav-link" data-section="bultenler">Bültenler</a></li>
+                <li><a class="nav-link" data-section="basari">Başarılar</a></li>
                 <li><a class="nav-link" data-section="iletisim">İletişim</a></li>
                 <li><a class="nav-link" data-section="sertifika">Sertifika Kontrol</a></li>
             </ul>
@@ -61,6 +62,7 @@
                 <a href="https://forms.gle/6U86qXKAVfLM6xxT8" target="_blank" class="hidden md:inline-block bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-5 py-2 rounded-full transition">
                     Üyelik Başvurusu
                 </a>
+                <!-- Mobil Hamburger Butonu -->
                 <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-white p-1">
                     <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
                     <svg id="menu-close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
@@ -68,15 +70,16 @@
             </div>
         </nav>
 
-        <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center gap-6 transition-transform duration-300 transform translate-x-full md:hidden">
+        <!-- Mobil Açılır Menü Ekranı (TAM EKRAN, MAT SİYAH, ARALIKLI) -->
+        <div id="mobile-menu" class="fixed inset-0 z-40 bg-black flex flex-col items-center justify-start pt-32 pb-10 overflow-y-auto gap-8 transition-transform duration-300 transform translate-x-full md:hidden">
             <a class="nav-link-mobile text-white text-xl font-medium" data-section="anasayfa">Anasayfa</a>
             <a class="nav-link-mobile text-white text-xl font-medium" data-section="faaliyetler">Faaliyetler</a>
             <a class="nav-link-mobile text-white text-xl font-medium" data-section="uyeler">Üyeler</a>
-            <a class="nav-link-mobile text-white text-xl font-medium" data-section="basari">Başarılar</a>
             <a class="nav-link-mobile text-white text-xl font-medium" data-section="bultenler">Bültenler</a>
+            <a class="nav-link-mobile text-white text-xl font-medium" data-section="basari">Başarılar</a>
             <a class="nav-link-mobile text-white text-xl font-medium" data-section="iletisim">İletişim</a>
             <a class="nav-link-mobile text-white text-xl font-medium" data-section="sertifika">Sertifika Kontrol</a>
-            <a href="https://forms.gle/6U86qXKAVfLM6xxT8" target="_blank" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-8 py-3 rounded-full transition">
+            <a href="https://forms.gle/6U86qXKAVfLM6xxT8" target="_blank" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-8 py-3 rounded-full transition shadow-lg">
                 Üyelik Başvurusu →
             </a>
         </div>
