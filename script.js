@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // MATEMATİKSEL ORAN-ORANTI FORMÜLÜ:
                 // Karakter sayısı arttıkça font boyutunu ters orantıyla pürüzsüzce küçültüyoruz.
                 // Taban boyut 3.2rem (kısa yazılar için devasa), sınır ise 1.2rem'in altına düşmeyecek (uzun yazılar için güvenli).
-                let fontSize = 3.2 - (karakterSayisi * 0.20);
+                let fontSize = 3.2 - (karakterSayisi * 0.22);
                 if (fontSize < 1.3) fontSize = 1.3; // Çok uzun yazılarda okunabilirliği korumak için alt sınır
                 if (fontSize > 3.2) fontSize = 3.2; // Çok kısa yazılarda üst sınır
 
